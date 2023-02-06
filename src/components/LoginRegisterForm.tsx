@@ -1,4 +1,8 @@
-const LoginRegisterForm = () => {
+interface Props {
+  isLogin: boolean
+}
+
+const LoginRegisterForm = ({ isLogin }: Props) => {
   return (
     <form className='flex flex-col justify-center items-center w-96 gap-8'>
       <input
@@ -12,16 +16,18 @@ const LoginRegisterForm = () => {
         placeholder='Password'
       />
       <div className='flex w-full justify-between'>
-        <p className='text-gray-200'>Don't have an account?</p>
+        <p className='text-gray-200'>
+          {isLogin ? 'Do not have an account?' : 'Already have an account?'}
+        </p>
         <a
-          href='/register'
+          href={isLogin ? '/register' : '/'}
           className='text-green-600'
         >
-          Register now!
+          {isLogin ? 'Register now!' : 'Login now!'}
         </a>
       </div>
       <button className='w-full bg-gradient-to-br from-green-500 to-green-600 p-4 rounded-2xl text-gray-200 font-bold'>
-        Login
+        {isLogin ? 'Login' : 'Register'}
       </button>
     </form>
   )
