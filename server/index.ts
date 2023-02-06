@@ -1,7 +1,9 @@
-import express from 'express'
+// commonJS
+import express, { Express } from 'express'
+// const router = express.Router()
 import mysql from 'mysql'
 
-const app = express()
+const app: Express = express()
 const port = 3000
 
 const connection = mysql.createConnection({
@@ -10,14 +12,8 @@ const connection = mysql.createConnection({
   password: 'root',
   database: 'login_register',
 })
-
 connection.connect()
 
-app.get('/', (req, res) => {
-  connection.query('SELECT * FROM users', (error, results, fields) => {
-    if (error) throw error
-    res.send(results)
-  })
-})
-
 app.listen(port, () => console.log(`Server listening on ${port}!`))
+
+module.exports = connection
