@@ -1,12 +1,23 @@
 import express from 'express'
+import mysql from 'mysql'
 
 const app = express()
 const port = 3000
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'root',
+  database: 'login_register',
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+connection.connect()
+
+app.get('/', (req, res) => {
+  connection.query('SELECT * FROM users', (error, results, fields) => {
+    if (error) throw error
+    res.send(results)
+  })
 })
+
+app.listen(port, () => console.log(`Server listening on ${port}!`))
