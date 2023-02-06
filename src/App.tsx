@@ -1,6 +1,8 @@
+import LoginRegisterForm from './components/LoginRegisterForm'
+
 function App() {
   return (
-    <div className='flex items-center justify-center h-screen bg-gray-800'>
+    <div className='flex flex-col items-center justify-center h-screen bg-gradient-to-b from-cyan-800 to-teal-900 gap-16'>
       <div className='flex flex-col items-center justify-center gap-4'>
         <h1 className='text-4xl text-gray-50'>Sing in</h1>
         <div className='flex flex-col items-center justify-center'>
@@ -13,6 +15,7 @@ function App() {
           </p>
         </div>
       </div>
+      <LoginRegisterForm />
     </div>
   )
 }
