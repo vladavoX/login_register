@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import LoginRegisterForm from './components/LoginRegisterForm'
 import { useLocation } from 'react-router-dom'
+import DisplayDataModal from './components/DisplayDataModal'
 
 function App() {
   const [isLogin, setIsLogin] = useState(true)
+  const [data, setData] = useState(null)
   const location = useLocation()
 
   useEffect(() => {
@@ -32,7 +34,17 @@ function App() {
           </p>
         </div>
       </div>
-      <LoginRegisterForm isLogin={isLogin} />
+      <LoginRegisterForm
+        isLogin={isLogin}
+        setIsLogin={setIsLogin}
+        setData={setData}
+      />
+      {data !== null && (
+        <DisplayDataModal
+          data={data}
+          setData={setData}
+        />
+      )}
     </div>
   )
 }

@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom'
 
 interface Props {
   isLogin: boolean
+  setIsLogin: any
+  setData: any
 }
 
-const LoginRegisterForm = ({ isLogin }: Props) => {
+const LoginRegisterForm = ({ isLogin, setIsLogin, setData }: Props) => {
   const navigation = useNavigate()
   const [userDetails, setUserDetails] = useState({
     username: '',
@@ -18,6 +20,7 @@ const LoginRegisterForm = ({ isLogin }: Props) => {
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     if (isLogin) {
       fetch('http://localhost:3000/api/login', {
         method: 'POST',
@@ -26,6 +29,11 @@ const LoginRegisterForm = ({ isLogin }: Props) => {
         },
         body: JSON.stringify(userDetails),
       })
+        .then((res) => res.json())
+        .then((data) => {
+          setData(data)
+          setUserDetails({ username: '', password: '' })
+        })
     }
     if (!isLogin) {
       fetch('http://localhost:3000/api/register', {
@@ -34,9 +42,11 @@ const LoginRegisterForm = ({ isLogin }: Props) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(userDetails),
-      })
-      navigation('/')
+      }).then((res) => res.json())
     }
+    navigation('/')
+    setUserDetails({ username: '', password: '' })
+    setIsLogin(true)
   }
 
   return (
