@@ -1,7 +1,7 @@
 ### #50ProjectsChallenge
 
 ### Previous Project 04 ➡ https://github.com/vladavoX/weather_app<br />
-### Next Project 06 ➡ Soon! 
+### Next Project 06 ➡ https://github.com/vladavoX/comment_section
 
 # Project 05: Login and Register system
 
